@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--
+ai-template: {
+  "version": "1.0",
+  "description": "MEAM for AutoCAD — User Guide (manual command to manage DWG properties).",
+  "instructions": [
+    "Populate each [[token]] with supplied document data without altering the surrounding markup.",
+    "When a container declares data-repeat, duplicate the child element for each array item and replace the nested tokens with the item values.",
+    "Set element attributes instead of text when a data-attr hint is present (e.g. data-attr='src').",
+    "Tokens support dot notation for nested objects and zero-based indices (e.g. [[footerDates.0]]).",
+    "You may provide data at runtime by setting window.MEAM_DATA before this file loads or by calling window.MEAM.fill(data). If no data is provided, sampleData will render."
+  ],
+  "slots": {
+    "metaTitle": "Document title for the browser tab and metadata.",
+    "headerTitles": "Array of per-page header titles.",
+    "docIdentifier": "Unique document identifier shown beneath the header band on every page.",
+    "logoSrc": "Path or URL to the primary logo displayed on page 1.",
+    "logoAlt": "Accessible description for the primary logo.",
+    "sideImageSrc": "Path or URL to the decorative side image on page 1.",
+    "sideImageAlt": "Accessible description for the side image.",
+    "footerDates": "Array of footer date strings per page (YYYY-MM-DD).",
+    "pageCounters": "Array of pagination labels per page (e.g. '1 of 2').",
+    "scopeParagraphs": "Array of paragraphs describing the scope section.",
+    "generalComplianceItems": "Array of bullet items (here used as Quick Start checklist).",
+    "euDirectiveRows": "Array of {reference,title,scope} rows (here used as the Field Reference table).",
+    "internationalStandardsRows": "Array of {standard,title,application} rows (here used as Troubleshooting table).",
+    "documentationList": "Array of bullet items for additional notes.",
+    "referencesList": "Array of bullet items for references/links.",
+    "notifiedBodies": "Array of {label,url} objects for support/contacts."
+  },
+  "sampleData": {
+    "metaTitle": "MEAM for AutoCAD — User Guide",
+    "headerTitles": [
+      "MEAM for AutoCAD — User Guide",
+      "MEAM for AutoCAD — User Guide (Continued)"
+    ],
+    "docIdentifier": "MEAM_AUTOCAD_USER_GUIDE_2025-11-05",
+    "logoSrc": "https://cdn.jsdelivr.net/gh/Meambv/PUBLIC@main/images/meam_logo.png",
+    "logoAlt": "MEAM logo",
+    "sideImageSrc": "https://cdn.jsdelivr.net/gh/Meambv/PUBLIC@main/images/side_title.png",
+    "sideImageAlt": "Knowledge Innovation Technology",
+    "footerDates": ["2025-11-05", "2025-11-05"],
+    "pageCounters": ["1 of 2", "2 of 2"],
+
+    "scopeParagraphs": [
+      "This guide explains how to install and use the MEAM command in AutoCAD to view and update key DWG custom properties.",
+      "The command is manual (no autorun). It opens a small form, lets you review fields, and saves changes back to the drawing's properties."
+    ],
+
+    "generalComplianceItems": [
+      "Create C:\\MEAM_AUTOCAD_SCRIPTS and copy MEAM.lsp there.",
+      "AutoCAD → Options → Files → Support File Search Path → Add C:\\MEAM_AUTOCAD_SCRIPTS.",
+      "(Optional) APPLOAD → Startup Suite → Add MEAM.lsp to make the command available at launch.",
+      "Open a DWG → type MEAM → press Enter → complete the form → OK → save the DWG."
+    ],
+
+    "euDirectiveRows": [
+      { "reference": "Project Number", "title": "(may be read-only)", "scope": "Identifies the project (e.g., P012345). If read-only, it was detected from the filename or pre-set centrally." },
+      { "reference": "Document No", "title": "DocumentNo", "scope": "Your unique identifier for this drawing (follow project numbering rules)." },
+      { "reference": "Document Title", "title": "DocumentTitle", "scope": "Clear, human-readable title (e.g., 'General Arrangement – Dryer Section')." },
+      { "reference": "Approver", "title": "Approver", "scope": "Name/initials of the person responsible for approval per QA procedure." },
+      { "reference": "Session Type", "title": "SessionType", "scope": "Pick one: Working (editing), Updating (revisions), or Reviewing (checks)." },
+      { "reference": "Requires New Review", "title": "RequiresNewReview", "scope": "Set to Yes if your changes require a fresh review cycle." }
+    ],
+
+    "internationalStandardsRows": [
+      { "standard": "ERR01", "title": "Unknown command: MEAM", "application": "Load the LISP (APPLOAD) and verify C:\\MEAM_AUTOCAD_SCRIPTS is in Support File Search Path." },
+      { "standard": "ERR02", "title": "Form doesn't appear", "application": "Check the command line for errors; try another DWG to rule out file-specific issues." },
+      { "standard": "ERR03", "title": "Properties not saved", "application": "Ensure the DWG isn't read-only; click OK in the form and save the drawing." },
+      { "standard": "ERR04", "title": "Wrong project number", "application": "Confirm DWG naming; if editable, correct it in the form according to project rules." }
+    ],
+
+    "documentationList": [
+      "Fields write to DWGPROPS → Custom: DocumentNo, DocumentTitle, Approver, SessionType, RequiresNewReview.",
+      "Optional fields like Phase, Scale, Rev, or ProjectName may appear later; follow local procedures if shown."
+    ],
+
+    "referencesList": [
+      "Internal guidance on DWG numbering and titles.",
+      "Team QA procedure for approvals and reviews."
+    ],
+
+    "notifiedBodies": [
+      { "label": "CAD Admin / Support", "url": "mailto:support@example.com" }
+    ]
+  }
+}
+-->
+<title data-slot="metaTitle">[[metaTitle]]</title>
+<style>
+  body{margin:0;background:#fff;font-family:"Neue Haas Grotesk",Helvetica,Arial,sans-serif;color:#000;}
+  .page-frame{position:relative;width:794px;height:1135px;margin:auto;border:1px solid #000;box-sizing:border-box;overflow:hidden;page-break-after:always;}
+  .header-band{position:absolute;top:0;left:0;width:92%;height:95px;border-bottom:1px solid #000;display:flex;align-items:center;justify-content:center;}
+  .header-band-more{position:absolute;top:0;left:0;width:100%;height:95px;border-bottom:1px solid #000;display:flex;align-items:center;justify-content:center;}
+  .header-title,.header-title-more{font-size:16pt;font-weight:700;color:#03397a;text-align:center;margin-left:60px;}
+  .logo{position:absolute;top:10px;left:20px;height:85px;width:auto;object-fit:contain;}
+  .doc-band,.doc-band-more{position:absolute;top:95px;left:0;text-align:center;}
+  .doc-band{width:92%;}.doc-band-more{width:100%;}
+  .doc-band .line,.doc-band-more .line{border-top:1px solid #000;width:100%;margin:4px 0;}
+  .doc-band .doc-id,.doc-band-more .doc-id{font-family:"Courier New",monospace;font-size:18px;line-height:1.2;}
+  .content-frame{position:absolute;left:45px;right:65px;top:160px;bottom:100px;overflow:hidden;}
+  .content-frame h1{font-size:15pt;font-weight:700;color:#03397a;margin-top:22px;margin-bottom:10px;}
+  .content-frame p{font-size:11pt;margin-left:40px;margin-bottom:8px;}
+  .content-frame ul{margin-left:60px;font-size:11pt;margin-top:0;margin-bottom:8px;}
+  .content-frame table{width:90%;margin-left:40px;border-collapse:collapse;font-size:10.5pt;}
+  .content-frame table th,.content-frame table td{border-bottom:1px solid #ccc;padding:4px 6px;text-align:left;}
+  .content-frame table th{background:#f3f3f3;font-weight:600;}
+  .content-frame table tr:nth-child(even){background:#fafafa;}
+  .sideframe{position:absolute;top:0;right:0;width:100px;height:1135px;overflow:hidden;background:transparent;z-index:0;}
+  .sideframe canvas{position:absolute;top:0;left:0;width:100px;height:1135px;background:transparent;}
+  .sideframe img{position:absolute;right:0;width:auto;height:300px;top:50px;object-fit:contain;}
+  .footer,.footermore{position:absolute;bottom:10px;left:0;right:0;border-top:1px solid #000;width:100%;display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:10px 20px;}
+  .footer{width:calc(100% - 100px);} .footermore{width:calc(100% - 25px);} 
+  .placeholder-note{font-size:10pt;margin-left:40px;color:#666;}
+</style>
+</head>
+
+<body>
+
+<!-- =============================== PAGE 1 =============================== -->
+<div class="page-frame" data-page="1">
+
+  <div class="header-band">
+    <img class="logo" data-slot="logoSrc" data-attr="src" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="[[logoAlt]]" />
+    <div class="header-title" data-slot="headerTitles.0">[[headerTitles.0]]</div>
+  </div>
+
+  <section class="doc-band">
+    <div class="line"></div>
+    <div class="doc-id">Doc. <span data-slot="docIdentifier">[[docIdentifier]]</span></div>
+    <div class="line"></div>
+  </section>
+
+  <main class="content-frame">
+    <h1>1. Purpose & Scope</h1>
+    <div data-repeat="scopeParagraphs">
+      <p>[[item]]</p>
+    </div>
+
+    <h1>2. Quick Start</h1>
+    <p class="placeholder-note">Use this checklist to get the command working and save properties.</p>
+    <ul data-repeat="generalComplianceItems">
+      <li>[[item]]</li>
+    </ul>
+
+    <h1>3. Field Reference (MEAM Form)</h1>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Property Key</th><th>Meaning / How to update</th></tr>
+      </thead>
+      <tbody data-repeat="euDirectiveRows">
+        <tr>
+          <td>[[reference]]</td>
+          <td>[[title]]</td>
+          <td>[[scope]]</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <aside class="sideframe">
+    <canvas id="rgbLines1" width="100" height="1123"></canvas>
+    <img data-slot="sideImageSrc" data-attr="src" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="[[sideImageAlt]]" />
+  </aside>
+
+  <footer class="footer">
+    <div>Meam BV</div>
+    <div data-slot="footerDates.0">[[footerDates.0]]</div>
+    <div data-slot="pageCounters.0">[[pageCounters.0]]</div>
+  </footer>
+</div>
+
+<!-- =============================== PAGE 2 =============================== -->
+<div class="page-frame" data-page="2">
+
+  <div class="header-band-more">
+    <div class="header-title-more" data-slot="headerTitles.1">[[headerTitles.1]]</div>
+  </div>
+
+  <section class="doc-band-more">
+    <div class="line"></div>
+    <div class="doc-id">Doc. <span data-slot="docIdentifier">[[docIdentifier]]</span></div>
+    <div class="line"></div>
+  </section>
+
+  <main class="content-frame">
+    <h1>4. Troubleshooting</h1>
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Symptom</th><th>Fix</th></tr>
+      </thead>
+      <tbody data-repeat="internationalStandardsRows">
+        <tr>
+          <td>[[standard]]</td>
+          <td>[[title]]</td>
+          <td>[[application]]</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1>5. Notes</h1>
+    <ul data-repeat="documentationList">
+      <li>[[item]]</li>
+    </ul>
+
+    <h1>6. References</h1>
+    <ul data-repeat="referencesList">
+      <li>[[item]]</li>
+    </ul>
+
+    <h1>7. Contacts</h1>
+    <ul data-repeat="notifiedBodies">
+      <li><a href="[[url]]">[[label]]</a></li>
+    </ul>
+  </main>
+
+  <aside class="sideframe">
+    <canvas id="rgbLines2" width="100" height="1123"></canvas>
+  </aside>
+
+  <footer class="footermore">
+    <div>Meam BV</div>
+    <div data-slot="footerDates.1">[[footerDates.1]]</div>
+    <div data-slot="pageCounters.1">[[pageCounters.1]]</div>
+  </footer>
+</div>
+
+<script>
+// --- Simple client-side filler (from your template) --------------------------
+(function(){
+  function getTemplateJSON(){
+    const html = document.documentElement.innerHTML;
+    const m = html.match(/<!--\s*ai-template:\s*({[\s\S]*?})\s*-->/);
+    if(!m) return null;
+    try { return JSON.parse(m[1]); } catch(e){ console.warn("ai-template JSON parse failed", e); return null; }
+  }
+  function get(obj, path){
+    if(!path) return undefined;
+    const parts = path.split('.');
+    let cur = obj;
+    for(const p of parts){ if(cur==null) return undefined; cur = cur[p]; }
+    return cur;
+  }
+  function replaceTokens(str, data){
+    return String(str).replace(/\[\[([^\]]+)\]\]/g, (_, token)=>{
+      if(token === 'item') return data.item ?? '';
+      const v = get(data, token.trim());
+      return (v==null) ? '' : String(v);
+    });
+  }
+  function fillSlots(data){
+    document.querySelectorAll('[data-slot]').forEach(el=>{
+      const key = el.getAttribute('data-slot');
+      const attr = el.getAttribute('data-attr');
+      const val = get(data, key);
+      if(val==null) return;
+      if(attr){ el.setAttribute(attr, String(val)); }
+      else { el.textContent = String(val); }
+    });
+  }
+  function fillRepeats(data){
+    document.querySelectorAll('[data-repeat]').forEach(container=>{
+      const key = container.getAttribute('data-repeat');
+      const arr = get(data, key);
+      if(!Array.isArray(arr)) { container.innerHTML=''; return; }
+      const templateHTML = container.innerHTML; // contents to clone
+      container.innerHTML = '';
+      arr.forEach(item=>{
+        const ctx = (item && typeof item === 'object') ? item : { item };
+        const fragmentHTML = replaceTokens(templateHTML, ctx);
+        const frag = document.createElement('div');
+        frag.innerHTML = fragmentHTML;
+        // move children out (avoid extra wrapper)
+        while(frag.firstChild){ container.appendChild(frag.firstChild); }
+      });
+    });
+  }
+  function drawBars(canvasId){
+    const canvas = document.getElementById(canvasId);
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const colors=['#d32f2f','#388e3c','#1976d2'], barW=6, gap=2, startX=40;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    colors.forEach((c,i)=>{ ctx.fillStyle=c; ctx.fillRect(startX+i*(barW+gap),0,barW,canvas.height); });
+  }
+  function fill(data){
+    fillSlots(data);
+    fillRepeats(data);
+    drawBars('rgbLines1');
+    drawBars('rgbLines2');
+    const t = get(data, 'metaTitle'); if(t){ document.title = String(t); }
+  }
+  window.MEAM = { fill };
+  const tpl = getTemplateJSON();
+  const runtime = window.MEAM_DATA || null;
+  const seed = runtime || (tpl && tpl.sampleData) || {};
+  fill(seed);
+})();
+</script>
+</body>
+</html>
