@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "docId": "X.X.X HNS from checklist or user",
+    "title": "Document Builder Showcase",
+    "docType": "basis_of_design",
+    "language": "en",
+    "summary": "A single file demonstrating every hard-coded block style the renderer supports.",
+    "createdAt": "2025-11-25T09:00:00Z",
+    "createdBy": {
+      "user": "demo",
+      "fullName": "Demo User"
+    },
+    "updatedAt": "2025-11-25T09:30:00Z",
+    "updatedBy": {
+      "user": "demo",
+      "fullName": "Demo User"
+    },
+    "revision": "1.0",
+    "tags": [
+      "builder",
+      "sample",
+      "showcase"
+    ]
+  },
+  "workflow": {
+    "state": "Draft",
+    "stateChangedAt": "2025-11-25T09:30:00Z",
+    "stateChangedBy": "demo",
+    "deadline": "2025-12-05T00:00:00Z",
+    "collaborators": [
+      {
+        "user": "demo",
+        "role": "Author",
+        "status": "APPROVED",
+        "updatedAt": "2025-11-25T09:30:00Z"
+      }
+    ]
+  },
+  "content": {
+    "sections": [
+      {
+        "type": "section",
+        "hns": "1",
+        "title": "Narrative styles",
+        "children": [
+          {
+            "type": "paragraph",
+            "richText": [
+              { "text": "This sentence mixes " },
+              { "text": "bold", "bold": true },
+              { "text": ", " },
+              { "text": "italic", "italic": true },
+              { "text": ", and " },
+              { "text": "underlined emphasis", "underline": true },
+              { "text": " without breaking the paragraph so reviewers can shout \"aha!\" at the right words." }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Use additional sentences for context or storytelling; each paragraph inherits the clean MEAM typography automatically."
+          },
+          {
+            "type": "callout",
+            "variant": "info",
+            "text": "Callouts spotlight critical reminders. This info block pairs nicely with inline formatting."
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "hns": "2",
+        "title": "Bullet storytelling",
+        "children": [
+          {
+            "type": "bullets",
+            "title": "Mix and match",
+            "items": [
+              "Combine paragraphs, lists, and tables inside any section.",
+              "Drag new bullets into the JSON to reorganize priorities.",
+              "Use this showcase as a template when drafting the next document."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Lists automatically adopt the document font, spacing, and indentation so they stay aligned with the section header."
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "hns": "3",
+        "title": "Tables with highlights",
+        "children": [
+          {
+            "type": "table",
+            "title": "Capability overview",
+            "headers": [
+              "Block",
+              "What it demonstrates"
+            ],
+            "rows": [
+              [
+                "Paragraph (rich)",
+                "Inline emphasis such as bold, italic, and underline"
+              ],
+              [
+                "Bullets",
+                "Section subtitles, multi-line bullet points, and spacing"
+              ],
+              [
+                "Table",
+                "Alternating row colors plus highlighted first column"
+              ],
+              [
+                "Image",
+                "Figures with captions sourced from checklist assets"
+              ],
+              [
+                "Callout",
+                "Message stripes ranging from info to warning"
+              ]
+            ],
+            "table_alternate": true,
+            "highlightFirstColumn": true,
+            "note": "The alternating style and shaded first column are hardcoded in the renderer."
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "hns": "4",
+        "title": "Visual assets",
+        "children": [
+          {
+            "type": "paragraph",
+            "text": "Reference any existing worker file path and the builder automatically routes it through the proxy."
+          },
+          {
+            "type": "image",
+            "src": "checklists/images/MEAMLOGO.png",
+            "alt": "MEAM logo",
+            "caption": "Images inherit a subtle border plus an optional caption."
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "hns": "5",
+        "title": "Layered structure",
+        "children": [
+          {
+            "type": "paragraph",
+            "text": "Sections can nest indefinitely. The renderer indents headings and keeps the numbering you supply."
+          }
+        ],
+        "sections": [
+          {
+            "type": "section",
+            "hns": "5.1",
+            "title": "First child",
+            "children": [
+              {
+                "type": "paragraph",
+                "text": "Child paragraphs stay associated with their parent heading."
+              }
+            ],
+            "sections": [
+              {
+                "type": "section",
+                "hns": "5.1.1",
+                "title": "Grandchild",
+                "children": [
+                  {
+                    "type": "bullets",
+                    "items": [
+                      "Use nesting for workstream breakdowns.",
+                      "Combine with callouts to flag open questions.",
+                      "Keep numbering consistent with MPMS conventions."
+                    ]
+                  },
+                  {
+                    "type": "callout",
+                    "variant": "warning",
+                    "text": "Warning callouts jump out with a contrasting band."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "hns": "6",
+        "title": "Rapid recap",
+        "children": [
+          {
+            "type": "callout",
+            "variant": "success",
+            "text": "Success! This single preview exercises paragraphs, bullets, tables, callouts, images, headers, nesting, and inline emphasis."
+          },
+          {
+            "type": "paragraph",
+            "text": "Tweak anything in the metadata panel to watch the preview and the title block update instantly."
+          }
+        ]
+      }
+    ],
+    "attachments": [],
+    "images": []
+  }
+}
